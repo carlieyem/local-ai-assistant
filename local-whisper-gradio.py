@@ -175,9 +175,7 @@ def get_response(prompt):
 pipe = pipeline("automatic-speech-recognition",
                 "openai/whisper-large-v3-turbo",
                 torch_dtype=torch.float16,
-                device="mps")
-
-
+                device="cuda:0" if torch.cuda.is_available() else "cpu")
 
 def transcribe_and_respond(audio_input):
     if audio_input is None:
